@@ -4,11 +4,8 @@ public class Service {
   public static final String OPERATION = "my-operation";
 
   public void operation() {
-    SecurityManager securityManager = null;
-    if (securityManager != null) {
-      // this SecurityManager method is not available in Java 11
-      // securityManager.checkMemberAccess(Service.class, Member.PUBLIC);
-    }
-    IO.println("Operation is executed");
+    // SecurityManager has been deprecated for removal since Java 17
+    // and is no longer used in modern Java applications
+    System.out.println("Operation is executed");
   }
 }

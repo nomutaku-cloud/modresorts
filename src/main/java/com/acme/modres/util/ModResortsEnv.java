@@ -3,6 +3,8 @@ package com.acme.modres.util;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -13,11 +15,20 @@ import java.util.logging.Logger;
 
 import com.acme.common.EnvConfig;
 
-import sun.misc.Unsafe;
-
 public class ModResortsEnv {
-  static final Unsafe myUnsafe = myGetUnsafe();
+  private static final VarHandle ADMIN_ENDPOINT_HANDLE;
   private static final Logger logger = Logger.getLogger(ModResortsEnv.class.getName());
+
+  static {
+    try {
+      MethodHandles.Lookup lookup = MethodHandles.privateLookupIn(
+          EnvConfig.class, MethodHandles.lookup());
+      ADMIN_ENDPOINT_HANDLE = lookup.findVarHandle(
+          EnvConfig.class, "adminApiEndpoint", String.class);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new ExceptionInInitializerError(e);
+    }
+  }
 
   private EnvConfig envConfig;
 
@@ -50,26 +61,9 @@ public class ModResortsEnv {
 
   private String getAdminEndpoint() {
     try {
-      Field f = EnvConfig.class.getDeclaredField("adminApiEndpoint");
-      long offset = myUnsafe.objectFieldOffset(f);
-      return (String) myUnsafe.getObject(envConfig, offset);
-    } catch (NoSuchFieldException | SecurityException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
-
-  private static Unsafe myGetUnsafe() {
-    try {
-      Field f = Unsafe.class.getDeclaredField("theUnsafe");
-      f.setAccessible(true);
-      Unsafe unsafe = (Unsafe) f.get(null);
-      return unsafe;
-    } catch (NoSuchFieldException _) {
-      return null;
-    } catch (IllegalArgumentException _) {
-      return null;
-    } catch (IllegalAccessException _) {
+      return (String) ADMIN_ENDPOINT_HANDLE.get(envConfig);
+    } catch (Exception e) {
+      logger.log(Level.SEVERE, "Failed to access adminApiEndpoint", e);
       return null;
     }
   }

@@ -76,8 +76,6 @@
       <groupId>com.acme.common</groupId>
       <artifactId>env-config</artifactId>
       <version>1.6</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/dependencies/env-config-1.6.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
