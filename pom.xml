@@ -8,17 +8,17 @@
   <packaging>war</packaging>
   <name>ModResorts</name>
   <properties>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
+    <maven.compiler.source>25</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.version>2.0.0</project.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
   <dependencies>
     <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <version>7.0</version>
+      <groupId>jakarta.platform</groupId>
+      <artifactId>jakarta.jakartaee-api</artifactId>
+      <version>10.0.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -28,9 +28,25 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <version>2.1.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.10.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -60,6 +76,8 @@
       <groupId>com.acme.common</groupId>
       <artifactId>env-config</artifactId>
       <version>1.6</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/dependencies/env-config-1.6.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -71,7 +89,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.5.1</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
           <packagingExcludes>pom.xml, src/, target/, WebContent/</packagingExcludes>

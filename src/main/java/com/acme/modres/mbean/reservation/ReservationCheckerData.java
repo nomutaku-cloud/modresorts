@@ -26,7 +26,7 @@ public class ReservationCheckerData {
   public boolean setSelectedDate(String dateStr) {
     try {
       selectedDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(dateStr);
-    } catch (Exception e) {
+    } catch (Exception _) {
       return false;
     }
     return true;

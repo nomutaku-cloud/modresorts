@@ -25,6 +25,11 @@ public final class DMBeanUtils {
         String type = opMetadata.getType();
         int impact = opMetadata.getImpact();
 
+        // Ensure type is not null - use "void" as default
+        if (type == null || type.isEmpty()) {
+          type = "void";
+        }
+
         MBeanOperationInfo opInfo = new MBeanOperationInfo(name, desc, /* signature */ null, type, impact, /*
                                                                                                             * descriptor
                                                                                                             */ null);

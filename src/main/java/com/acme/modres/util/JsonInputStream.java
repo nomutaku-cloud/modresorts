@@ -36,7 +36,7 @@ public class JsonInputStream extends FileInputStream {
           try {
             is.close();
             is.read(); // test if file is closed
-          } catch (IOException e) {
+          } catch (IOException _) {
             // closed successfully
             return jsonObject;
           } catch (Throwable e) {

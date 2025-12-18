@@ -65,11 +65,11 @@ public class ModResortsEnv {
       f.setAccessible(true);
       Unsafe unsafe = (Unsafe) f.get(null);
       return unsafe;
-    } catch (NoSuchFieldException ex) {
+    } catch (NoSuchFieldException _) {
       return null;
-    } catch (IllegalArgumentException ex) {
+    } catch (IllegalArgumentException _) {
       return null;
-    } catch (IllegalAccessException ex) {
+    } catch (IllegalAccessException _) {
       return null;
     }
   }

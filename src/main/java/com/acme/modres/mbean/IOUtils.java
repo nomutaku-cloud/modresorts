@@ -30,12 +30,12 @@ public final class IOUtils {
       if (initialStream != null) {
         try {
           initialStream.close();
-        } catch (IOException e) {
+        } catch (IOException _) {
         }
       } else if (outStream != null) {
         try {
           outStream.close();
-        } catch (IOException e) {
+        } catch (IOException _) {
         }
       }
     }

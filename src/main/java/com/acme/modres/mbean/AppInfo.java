@@ -55,11 +55,11 @@ public class AppInfo implements DynamicMBean {
   }
 
   private void increaseLimit() {
-    System.out.println("Limit increased");
+    IO.println("Limit increased");
   }
 
   private void resetLimit() {
-    System.out.println("Limit reset");
+    IO.println("Limit reset");
   }
 
   @Override
